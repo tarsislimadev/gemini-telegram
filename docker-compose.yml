@@ -1,0 +1,17 @@
+services:
+  telegram-bot:
+    image: tmvdl/gemini-telegram
+    build: .
+    container_name: gemini-telegram-bot
+    restart: unless-stopped
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - TELEGRAM_API_KEY=${TELEGRAM_API_KEY}
+    volumes:
+      - ./app.py:/app/app.py
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
